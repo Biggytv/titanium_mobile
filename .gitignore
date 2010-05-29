@@ -1,4 +1,6 @@
 *.pyc
 dist
+bin
 .sconsign.dblite
+.project
 .DS_Store
