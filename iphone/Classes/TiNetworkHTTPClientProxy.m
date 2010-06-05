@@ -92,7 +92,7 @@ extern NSString * const TI_APPLICATION_DEPLOYTYPE;
 @implementation TiNetworkHTTPClientProxy
 
 @synthesize onload, onerror, onreadystatechange, ondatastream, timeout, onsendstream;
-@synthesize validatesSecureCertificate;
+@synthesize validatesSecureCertificate, progressGranularity;
 
 -(id)init
 {
@@ -495,6 +495,10 @@ extern NSString * const TI_APPLICATION_DEPLOYTYPE;
 		if (uploadProgress==value)
 		{
 			return;
+		} else if (progressGranularity && value != 1 &&
+                           value - uploadProgress < [progressGranularity floatValue])
+		{
+			return;
 		}
 		uploadProgress = value;
 	}
@@ -503,10 +507,14 @@ extern NSString * const TI_APPLICATION_DEPLOYTYPE;
 		if (downloadProgress==value)
 		{
 			return;
+		} else if (progressGranularity && value != 1 &&
+                           value - downloadProgress < [progressGranularity floatValue])
+		{
+			return;
 		}
 		downloadProgress = value;
 	}	
-	
+
 	TiNetworkHTTPClientResultProxy *thisPointer = [[[TiNetworkHTTPClientResultProxy alloc] initWithDelegate:self] autorelease];
 	
 	NSDictionary *event = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:value] forKey:@"progress"];
