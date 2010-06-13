@@ -41,7 +41,9 @@ play: starting playing the source. if paused, will resume.
 stop: stop playing the audio and reset it to the beginning.
 pause: temporarily pause the audio. to resume, invoke `play`.
 reset: reset the audio to the beginning.
-release: release all internal resources. this is typically unnecessary but can be useful if you load a large audio file in `app.js` and play it only once and you would like to release all releases after your final play to reduce memory.
+release: release all internal resources. for simple apps this is not
+necessary, but if you load large files or many
+files, you should do this or you'll eventually run out of memory or file descriptors.
 setVolume: set the volume of the audio
 getVolume: return the value of the audio
 setTime: set the time position of the audio
