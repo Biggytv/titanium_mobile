@@ -8,3 +8,4 @@ bin/android/widget/*
 .sconsign.dblite
 .project
 .DS_Store
+/bin
