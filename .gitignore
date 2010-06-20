@@ -2,6 +2,7 @@
 dist
 bin
 bin/*
+bin/*.*
 build/*
 bin/android/widget/*
 .sconsign.dblite
