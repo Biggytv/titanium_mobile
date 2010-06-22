@@ -549,6 +549,8 @@
         [(TiUIViewProxy*)[(TiUIView*)footerView proxy] reposition];
         [[self tableView] setTableFooterView:footerView];
     }
+	
+	[tableview reloadData];
 }
 
 - (void)triggerActionForIndexPath:(NSIndexPath *)indexPath fromPath:(NSIndexPath*)fromPath tableView:(UITableView*)ourTableView wasAccessory: (BOOL)accessoryTapped search:(BOOL)viaSearch name:(NSString*)name
@@ -1051,12 +1053,14 @@
 	}
 }
 
+/*
 -(void)setData_:(NSArray *)newData
 {
 	NSDictionary * properties = [NSDictionary dictionaryWithObject:NUMINT(UITableViewRowAnimationNone) forKey:@"animationStyle"];
 	TiUITableViewAction *action = [[[TiUITableViewAction alloc] initWithRow:nil animation:properties section:0 type:TiUITableViewActionSetData] autorelease];
 	[self dispatchAction:action];
 }
+*/
 
 -(void)setSearchHidden_:(id)hide
 {
