@@ -412,7 +412,7 @@ extern NSString * const TI_APPLICATION_DEPLOYTYPE;
 	else
 	{
 		[[TiApp app] startNetwork];
-		[request start];
+		[request startSynchronous];
 		[[TiApp app] stopNetwork];
 	}
 }
