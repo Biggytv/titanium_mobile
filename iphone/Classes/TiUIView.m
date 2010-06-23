@@ -701,6 +701,11 @@ DEFINE_EXCEPTIONS
 //Todo: Generalize.
 -(void)setKrollValue:(id)value forKey:(NSString *)key withObject:(id)props
 {
+	if(value == [NSNull null])
+	{
+		value = nil;
+	}
+
 	SEL method = SetterWithObjectForKrollProperty(key);
 	if([self respondsToSelector:method])
 	{

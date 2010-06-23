@@ -163,7 +163,7 @@ void DoProxyDelegateReadValuesWithKeysFromProxy(UIView<TiProxyDelegate> * target
 	BOOL isMainThread = [NSThread isMainThread];
 	NSNull * nullObject = [NSNull null];
 	BOOL viewAttached = YES;
-	
+		
 	NSArray * keySequence = [proxy keySequence];
 	
 	// assume if we don't have a view that we can send on the 
@@ -729,7 +729,17 @@ void DoProxyDelegateReadValuesWithKeysFromProxy(UIView<TiProxyDelegate> * target
 
 	for (NSString * thisKey in keyedValues)
 	{
-		[self setValue:[keyedValues valueForKey:thisKey] forKey:thisKey];
+		id thisValue = [keyedValues objectForKey:thisKey];
+		if (thisValue == nil) //Dictionary doesn't have this key. Skip.
+		{
+			continue;
+		}
+		if (thisValue == [NSNull null]) 
+		{ 
+			//When a null, we want to write a nil.
+			thisValue = nil;
+		}
+		[self setValue:thisValue forKey:thisKey];
 	}
 }
  
