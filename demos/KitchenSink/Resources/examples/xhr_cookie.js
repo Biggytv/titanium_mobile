@@ -65,7 +65,7 @@ var gReader =
 			try
 			{ 
 				var results = this.responseText; 
-				Ti.API.info(results);
+				Ti.API.info("Request result: "+results);
 				var tokens = results.split("\n");
 				for (var c=0;c<tokens.length;c++)
 				{
@@ -102,7 +102,7 @@ var gReader =
 				var results = this.responseText; 
 				gReader.Token=results; 
 								
-				label.text = /[a-zA-Z0-9-]+/.test(gReader.Token) ? ("Passed: "+results) : "Failed";
+				label.text = /^[a-zA-Z0-9-]+$/.test(gReader.Token) ? ("Passed: "+results) : ("Failed: "+results);
 			} 
 			catch(err) { 
 				Ti.API.info('>>>>>>> Error In getToken ' + err ); 
