@@ -55,3 +55,7 @@ win.add(Titanium.UI.createImageView({
 }));
 
 activeMovie.play();
+
+win.addEventListener('close', function() {
+	activeMovie.stop();
+});
