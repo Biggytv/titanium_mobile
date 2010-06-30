@@ -1,0 +1,45 @@
+- namespace
+
+Titanium.Facebook.PaypalButton
+
+- type
+
+object
+
+- subtype
+
+view
+
+- description
+
+The PayPal Button created by `Titanium.Paypal.createPaypalButton`.
+
+- since
+
+1.4
+
+- platforms
+
+android
+
+
+- methods
+
+- events
+
+paymentError: fired when there is an error with the payment
+paymentCancelled: fired when the user cancelled the payment
+paymentSuccess: fired when the payment completes sucessfully
+
+- event : paymentError
+
+errorNumber: The number of the error
+errorMessage: The error message 
+
+- event : paymentCancelled
+
+- event : paymentSuccess
+
+transactionID: The transaction ID of the payment
+
+

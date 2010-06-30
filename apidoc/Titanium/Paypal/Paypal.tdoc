@@ -1,0 +1,52 @@
+- namespace
+
+Titanium.Paypal
+
+- type
+
+module
+
+- returns
+
+object
+
+- description
+
+The top level Paypal module.  The Paypal module allows you to make payments to somebody natively on the phone.
+
+- since
+
+1.4
+
+- platforms
+
+android
+
+- methods
+
+createPaypalButton: Creates a button to initiate the payment
+
+- method : createPaypalButton, object
+
+params[object]: the parameters for the request. 
+
+- properties
+
+- events
+
+paymentError: fired when there is an error with the payment
+paymentCancelled: fired when the user cancelled the payment
+paymentSuccess: fired when the payment completes sucessfully
+
+- event : paymentError
+
+errorNumber: The number of the error
+errorMessage: The error message 
+
+- event : paymentCancelled
+
+- event : paymentSuccess
+
+transactionID: The transaction ID of the payment
+
+
