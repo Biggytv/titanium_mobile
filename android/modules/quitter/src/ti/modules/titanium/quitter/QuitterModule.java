@@ -7,13 +7,16 @@
 package ti.modules.titanium.quitter;
 
 import org.appcelerator.titanium.TiContext;
-import org.appcelerator.titanium.TiDict;
 import org.appcelerator.titanium.TiModule;
-import org.appcelerator.titanium.util.TiConvert;
+import org.appcelerator.titanium.TiProxy;
 
 public class QuitterModule extends TiModule {
 
 	public QuitterModule(TiContext context) {
 		super(context);
+	}
+	
+	public static void quitNow() {
+		System.exit(0);
 	}
 }
