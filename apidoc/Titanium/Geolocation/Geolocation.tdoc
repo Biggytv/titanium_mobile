@@ -28,6 +28,8 @@ setShowCalibration: configure the calibration UI. set the false to disable the c
 
 - properties
 
+accuracy[int]: The type of accuracy you are after - valid options are the ACCURACY_ constants
+
 ACCURACY_BEST[int]: accuracy constant
 ACCURACY_NEAREST_TEN_METERS[int]: accuracy constant
 ACCURACY_HUNDRED_METERS[int]: accuracy constant
