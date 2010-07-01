@@ -8,7 +8,6 @@ package ti.modules.titanium.quitter;
 
 import org.appcelerator.titanium.TiContext;
 import org.appcelerator.titanium.TiModule;
-import org.appcelerator.titanium.TiProxy;
 
 public class QuitterModule extends TiModule {
 

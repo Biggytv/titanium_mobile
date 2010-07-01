@@ -15,8 +15,8 @@ public class QuitterProxy extends TiProxy {
 	/**
 	 * @param tiContext
 	 */
-	public QuitterProxy(TiContext tiContext) {
-		super(tiContext);
+	public QuitterProxy(TiContext context, Object[] args) {
+		super(context);
 		
 		QuitterModule.quitNow();
 	}
