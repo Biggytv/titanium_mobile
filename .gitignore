@@ -9,3 +9,5 @@ bin/android/widget/*
 .project
 .DS_Store
 /bin
+.externalToolBuilders/*
+debug.log
