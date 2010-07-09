@@ -9,6 +9,7 @@ package org.appcelerator.titanium.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,7 +45,8 @@ public class TiUIHelper
 	private static final boolean DBG = TiConfig.LOGD;
 
 	public static final Pattern SIZED_VALUE = Pattern.compile("([0-9]*\\.?[0-9]+)\\W*(px|dp|dip|sp|sip|mm|pt|in)?");
-
+	private static ArrayList<String> previousUnsupportedFonts = new ArrayList<String>();
+	
 	public static OnClickListener createDoNothingListener() {
 		return new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
@@ -192,7 +194,10 @@ public class TiUIHelper
 			} else if ("sans-serif".equals(fontFamily)) {
 				tf = Typeface.SANS_SERIF;
 			} else {
-				Log.w(LCAT, "Unsupported font: '" + fontFamily + "' supported fonts are 'monospace', 'serif', 'sans-serif'. Using 'sans-serif'.");
+				if(!previousUnsupportedFonts.contains(fontFamily)) {
+					previousUnsupportedFonts.add(fontFamily);	
+					Log.w(LCAT, "An unsupported font('" + fontFamily + "') was used in the application. The supported android fonts are 'monospace', 'serif', 'sans-serif'. Using 'sans-serif' instead.");
+				}
 			}
 		}
 		tv.setTypeface(tf, toTypefaceStyle(fontWeight));
