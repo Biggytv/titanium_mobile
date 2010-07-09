@@ -195,7 +195,7 @@ public class TiUIHelper
 				tf = Typeface.SANS_SERIF;
 			} else {
 				if(!previousUnsupportedFonts.contains(fontFamily)) {
-					previousUnsupportedFonts.add(fontFamily);	
+					addFontFamilyToList(fontFamily);	
 					Log.w(LCAT, "An unsupported font('" + fontFamily + "') was used in the application. The supported android fonts are 'monospace', 'serif', 'sans-serif'. Using 'sans-serif' instead.");
 				}
 			}
@@ -392,5 +392,10 @@ public class TiUIHelper
 			Log.e(LCAT, "Unable to load bitmap. Not enough memory: " + e.getMessage());
 		}
 		return b;
+	}
+	
+	synchronized public static void addFontFamilyToList(String fontFamily) 
+	{
+		previousUnsupportedFonts.add(fontFamily);
 	}
 }
