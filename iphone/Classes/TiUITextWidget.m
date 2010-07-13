@@ -70,7 +70,8 @@
 
 -(void)setColor_:(id)color
 {
-	[(id)[self textWidgetView] setTextColor:[[TiUtils colorValue:color] _color]];
+	UIColor * newColor = [[TiUtils colorValue:color] _color];
+	[(id)[self textWidgetView] setTextColor:(newColor != nil)?newColor:[UIColor darkTextColor]];
 }
 
 -(void)setFont_:(id)font
