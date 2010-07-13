@@ -242,7 +242,7 @@ public class TiUIHelper
 		Drawable bgSelectedDrawable = null;
 		Drawable bgFocusedDrawable = null;
 		Drawable bgDisabledDrawable = null;
-
+ 
 		TiFileHelper tfh = new TiFileHelper(context);
 
 		if (image != null) {
