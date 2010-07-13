@@ -101,11 +101,11 @@ b3.addEventListener('click', function()
 });
 win.add(b3);
 
-var size = Ti.UI.createLabel({
+var sizeAndFontFamily = Ti.UI.createLabel({
 	height:30,
 	width:300,
-	font:{fontSize:14},
+	font:{fontSize:14, fontFamily:'LiberationMono-BoldItalic'},
 	color:'#777',
 	bottom:10
 });
-win.add(size)
+win.add(sizeAndFontFamily)
