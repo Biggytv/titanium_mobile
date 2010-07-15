@@ -151,7 +151,10 @@ public class TiAnimationBuilder
 		}
 
 		if (tdm != null) {
-			as.setFillAfter(true);
+			if(tdm.getFillAfter() == true) 
+				as.setFillAfter(true);
+			else
+				as.setFillBefore(true);
 			as.setFillEnabled(true);
 			if (tdm.hasRotation()) {
 				Animation a = new RotateAnimation(0,tdm.getRotation(), anchorPointX, anchorPointY);
@@ -168,6 +171,12 @@ public class TiAnimationBuilder
 					0,
 					anchorPointY + tdm.getYTranslation()
 					);
+				if(tdm.getFillAfter() == true) 
+					a.setFillAfter(true);
+				else
+					a.setFillBefore(true);
+				a.setFillEnabled(true);
+				Log.e("ANIMATION", "Work Please");
 				addAnimation(as, a);
 			}
 		}

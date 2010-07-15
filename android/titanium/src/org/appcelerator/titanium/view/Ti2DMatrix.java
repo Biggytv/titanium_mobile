@@ -17,7 +17,9 @@ public class Ti2DMatrix extends TiProxy
 	Double translateY;
 	Double scaleFactor;
 	Double rotateDegrees;
-
+	boolean fillAfter = true;
+	boolean fillBefore = false;
+	
 	public Ti2DMatrix(TiContext tiContext, Object[] args)
 	{
 		super(tiContext);
@@ -60,5 +62,19 @@ public class Ti2DMatrix extends TiProxy
 	}
 	public float getRotation() {
 		return rotateDegrees.floatValue();
+	}
+	public boolean getFillBefore() {
+		return fillBefore;
+	}
+	public boolean getFillAfter() {
+		return fillAfter;
+	}
+	public void setFillBefore(boolean value) {
+		fillBefore = value;
+		fillAfter = !value;
+	}
+	public void setFillAfter(boolean value) {
+		fillAfter = value;
+		fillBefore = !value;
 	}
 }
