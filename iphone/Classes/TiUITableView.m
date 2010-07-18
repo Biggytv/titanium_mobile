@@ -1322,7 +1322,6 @@ if(ourTableView != tableview)	\
         }
 
 		[table beginUpdates];
-        [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationFade];
         if (emptySection)
 		{
 			NSIndexSet * thisSectionSet = [NSIndexSet indexSetWithIndex:[indexPath section]];
@@ -1336,6 +1335,11 @@ if(ourTableView != tableview)	\
 			}
 
         }
+		else
+		{
+			[table deleteRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationFade];
+		}
+
 		[table endUpdates];
 	}
 }
