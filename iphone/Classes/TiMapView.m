@@ -488,7 +488,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)aview calloutAccessoryControlTapped:(UIControl *)control
 {
-	if ([aview isKindOfClass:[MKPinAnnotationView class]])
+	if ([aview conformsToProtocol:@protocol(TiMapAnnotation)])
 	{
 		MKPinAnnotationView *pinview = (MKPinAnnotationView*)aview;
 		NSString * clickSource = @"unknown";
