@@ -101,6 +101,7 @@ public class TiBackgroundDrawable extends StateListDrawable {
 	@Override
 	protected boolean onStateChange(int[] stateSet) {
 		boolean changed = super.onStateChange(stateSet);
+		changed = setState(stateSet);
 		boolean drawableChanged = false;
 		if (background != null) {
 //			Log.e("TiBackground", "background="+background.getClass().getSimpleName()+",state.len="+stateSet.length);
@@ -108,9 +109,9 @@ public class TiBackgroundDrawable extends StateListDrawable {
 //				Log.e("TiBackground", "    state[" + i + "]=" + stateSet[i]);
 //			}
 			drawableChanged = background.setState(stateSet);
-//			if (drawableChanged) {
-//				background.invalidateSelf();
-//			}
+			if (drawableChanged) {
+				invalidateSelf();
+			}
 		}
 
 		return changed || drawableChanged;
