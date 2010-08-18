@@ -179,7 +179,7 @@ public class PickerProxy extends TiViewProxy
 		if (columns == null) {
 			return new PickerColumnProxy[]{};
 		} else {
-			return columns.toArray(new PickerColumnProxy[]{});
+			return columns.toArray(new PickerColumnProxy[columns.size()]);
 		}
 	}
 	
