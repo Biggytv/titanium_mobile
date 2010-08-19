@@ -762,6 +762,7 @@ public class TiHTTPClient
 				
 				if (timeout != -1) {
 					HttpConnectionParams.setConnectionTimeout(params, timeout);
+					HttpConnectionParams.setSoTimeout(params, timeout);
 				}
 				
 				
