@@ -301,7 +301,7 @@ public class KrollObject extends ScriptableObject
 	{
 		// dynamic property
 		Object o = null;
-
+		
 		Method getMethod = (Method) loadMethod(target.getClass(), "getDynamicValue");
 		Method setMethod = (Method) loadMethod(target.getClass(), "setDynamicValue");
 		
@@ -773,6 +773,9 @@ public class KrollObject extends ScriptableObject
 		{
 			return Context.javaToJS(null, kroll.getScope());
 		} 
+		else if (value instanceof KrollCallback) {
+			return ((KrollCallback)value).toJSFunction();
+		}
 		else {
 			o = new KrollObject(kroll, value);
 		}
