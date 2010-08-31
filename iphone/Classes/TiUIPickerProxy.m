@@ -166,6 +166,10 @@
 
 USE_VIEW_FOR_VERIFY_HEIGHT
 
+-(void)reloadColumn:(id)column
+{
+	[self makeViewPerformSelector:@selector(reloadColumn:) withObject:column createIfNeeded:YES waitUntilDone:NO];
+}
 
 @end
 
