@@ -75,6 +75,7 @@
 			[TiUtils floatValue:[args objectAtIndex:1]])];
 
 	[self replaceValue:offset forKey:@"contentOffset" notification:YES];
+	[offset release];
 }
 
 
@@ -83,6 +84,7 @@
 	CGPoint offset = [scrollView contentOffset];
 	TiPoint * offsetPoint = [[TiPoint alloc] initWithPoint:offset];
 	[self replaceValue:offsetPoint forKey:@"contentOffset" notification:NO];
+	[offsetPoint release];
 
 	if ([self _hasListeners:@"scroll"])
 	{
