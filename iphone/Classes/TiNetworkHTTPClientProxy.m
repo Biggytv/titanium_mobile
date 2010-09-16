@@ -276,12 +276,16 @@ extern NSString * const TI_APPLICATION_DEPLOYTYPE;
 
 -(void)abort:(id)args
 {
-	if (request!=nil && connected)
-	{
-		connected = NO;
-		[[TiApp app] stopNetwork];
-		[request cancel];
-	}
+        if (connected)
+        {
+                connected = NO;
+                [[TiApp app] stopNetwork];
+        }
+        if (request!=nil)
+        {
+                [request cancel];
+                [request release];
+        }
 }
 
 -(void)open:(id)args
