@@ -13,6 +13,7 @@ data.push({title:'Orientation', hasChild:true, test:'../examples/orientation.js'
 if (Titanium.Platform.osname!='ipad')
 {
 	data.push({title:'Camera', hasChild:true, test:'../examples/camera.js'});
+	data.push({title:'Barcode', hasChild:true, test:'../examples/barcode.js'});
 }
 
 // add iphone specific tests
