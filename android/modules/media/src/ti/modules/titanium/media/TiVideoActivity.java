@@ -6,6 +6,7 @@
  */
 package ti.modules.titanium.media;
 
+import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.Log;
 import org.appcelerator.titanium.util.TiConfig;
@@ -170,6 +171,8 @@ public class TiVideoActivity extends Activity
 	protected void onResume() {
 		super.onResume();
 
+		((TiApplication) getApplication()).setCurrentActivity(this, this);
+
 		if (started) {
 			videoView.start();
 		}
@@ -178,6 +181,7 @@ public class TiVideoActivity extends Activity
 	@Override
 	protected void onPause() {
 		super.onPause();
+		((TiApplication) getApplication()).setCurrentActivity(this, null);
 		videoView.pause();
 	}
 
