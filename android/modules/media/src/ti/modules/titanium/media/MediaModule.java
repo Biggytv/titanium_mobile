@@ -27,6 +27,8 @@ import org.appcelerator.titanium.util.TiFileHelper;
 import org.appcelerator.titanium.util.TiIntentWrapper;
 import org.appcelerator.titanium.util.TiUIHelper;
 
+import com.sun.org.apache.bcel.internal.generic.FSUB;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,6 +36,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
+import android.hardware.Camera.PictureCallback;
+import android.hardware.Camera.ShutterCallback;
 import android.net.Uri;
 import android.os.Vibrator;
 import android.provider.MediaStore;
@@ -55,6 +59,16 @@ public class MediaModule extends TiModule
 	protected static final int NO_VIDEO = 3;
 
 	protected static TiDict constants;
+	
+	Camera camera = null;
+	boolean saveToPhotoGallery = false;
+	boolean useOverlay = false;
+	boolean autoHide = true;
+	boolean showControls = true;
+	
+	KrollCallback successCallback = null;
+	KrollCallback cancelCallback = null;
+	KrollCallback errorCallback = null;
 
 	public MediaModule(TiContext tiContext)
 	{
@@ -92,6 +106,143 @@ public class MediaModule extends TiModule
 		}
 	}
 
+	/* methods:
+	 * 		showCamera(opts: 
+	 * 				success:func(),
+	 * 				error:func(),
+	 * 				cancel:func(),
+	 * 				autohide:bool(def:true),
+	 * 				overlay:view,
+	 * 				showControls:bool(def:true),
+	 * 				saveToPhotoGallery:bool(def:false),
+	 * 				allowEditing:bool(def:false),
+	 * 				animated:bool(def:true),
+	 * 				mediaTypes:array,
+	 * 				videoMaximumDuration:float,
+	 * 				videoQuality:const,
+	 * 				transform: transformation matrix
+	 * 				
+	 * 		hideCamera() // only when camera is present (autohide==false)
+	 * 		takePicture() // only when camera is present (autohide==false)
+	 * 		saveToPhotoGallery(img)
+	 * 
+	 * break down showCamera();
+	 *v 	retrieve callbacks from options
+	 *v 	check for camera support
+	 * 	get options
+	 * 	show with or without overlay
+	 * 
+	 * 
+	 */
+	
+	public void showCamera(Object[] args){
+		
+		TiDict options = (TiDict) args[0];
+		successCallback=null;
+		cancelCallback=null;
+		errorCallback=null;
+		if (options.containsKey("success")) {
+			successCallback = (KrollCallback) options.get("success");
+		}
+		if (options.containsKey("cancel")) {
+			cancelCallback = (KrollCallback) options.get("cancel");
+		}
+		if (options.containsKey("error")) {
+			errorCallback = (KrollCallback) options.get("error");
+		}
+
+		final KrollCallback fSuccessCallback = successCallback;
+		final KrollCallback fCancelCallback = cancelCallback;
+		final KrollCallback fErrorCallback = errorCallback;
+
+		if (DBG) {
+			Log.d(LCAT, "showCamera called");
+		}
+		
+		if(!isCameraSupported()){
+			if (errorCallback != null) {
+				errorCallback.callWithProperties(createErrorResponse(NO_CAMERA, "Camera not available."));
+			}
+			return;
+		}
+		
+		// Get options set
+		
+		saveToPhotoGallery = false;
+		if (options.containsKey("saveToPhotoGallery")) {
+			saveToPhotoGallery = options.getBoolean("saveToPhotoGallery");
+		}
+		useOverlay = false;
+		if (options.containsKey("overlay")) {
+			useOverlay = true;
+		}
+		autoHide = true;
+		if (options.containsKey("autohide")) {
+			autoHide = options.getBoolean("autohide");
+		}
+		showControls = true;
+		if (options.containsKey("showControls")) {
+			showControls = options.getBoolean("showControls");
+		}
+		
+	}
+	
+	public void takePicture(){
+		if(camera != null){
+			camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+		}else{
+			if(errorCallback !=null){
+				errorCallback.callWithProperties(createErrorResponse(NO_CAMERA, "Camera not available or showCamera() not called yet."));
+			}
+		}
+	}
+	
+	ShutterCallback shutterCallback = new ShutterCallback() {
+	  public void onShutter() {
+	    // TODO Do something when the shutter closes.
+	  }
+	};
+	 
+	PictureCallback rawCallback = new PictureCallback() {
+	  public void onPictureTaken(byte[] _data, Camera _camera) {
+	    // TODO Do something with the image RAW data.
+	  }
+	};
+	 
+	PictureCallback jpegCallback = new PictureCallback() {
+	  public void onPictureTaken(byte[] _data, Camera _camera) {
+		  if(saveToPhotoGallery){
+			  saveToPhotoGallery(_data);
+		  }else{
+			  
+		  }
+	    // TODO Do something with the image JPEG data.
+	  }
+	};
+	
+	public boolean isCameraSupported(){
+		// Check for camera support
+		// return true if camera != null, or Camera.open() != null. False for anything else.
+		if(camera != null) {
+			return true;
+		}
+		try {
+			camera = Camera.open();
+			if (camera != null) {
+				camera.release();
+				camera = null;
+				return true;
+			}
+		} catch (Throwable t) {
+			if (camera != null) {
+				camera.release();
+				camera = null;
+			}
+		}
+		return false;
+	}
+	
+/*	
 	public void showCamera(Object[] args)
 	{
 		TiDict options = (TiDict) args[0];
@@ -127,6 +278,7 @@ public class MediaModule extends TiModule
 		} catch (Throwable t) {
 			if (camera != null) {
 				camera.release();
+				camera = null;
 			}
 			if (errorCallback != null) {
 				errorCallback.callWithProperties(createErrorResponse(NO_CAMERA, "Camera not available."));
@@ -137,6 +289,10 @@ public class MediaModule extends TiModule
 		boolean saveToPhotoGallery = false;
 		if (options.containsKey("saveToPhotoGallery")) {
 			saveToPhotoGallery = options.getBoolean("saveToPhotoGallery");
+		}
+		boolean useOverlay = false;
+		if (options.containsKey("overlay")) {
+			useOverlay = true;
 		}
 
 		Activity activity = getTiContext().getActivity();
@@ -244,7 +400,7 @@ public class MediaModule extends TiModule
 				}
 			});
 	}
-
+*/
 	public void openPhotoGallery(Object[] args)
 	{
 		TiDict options = (TiDict) args[0];
