@@ -83,6 +83,10 @@
 
 - (void)launcherView:(LauncherView*)launcher didRemoveItem:(LauncherItem*)item;
 
+- (void)launcherView:(LauncherView*)launcher willDragItem:(LauncherItem*)item;
+
+- (void)launcherView:(LauncherView*)launcher didDragItem:(LauncherItem*)item;
+
 - (void)launcherView:(LauncherView*)launcher didMoveItem:(LauncherItem*)item;
 
 - (void)launcherView:(LauncherView*)launcher didSelectItem:(LauncherItem*)item;
