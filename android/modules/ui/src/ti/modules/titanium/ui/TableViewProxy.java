@@ -129,6 +129,7 @@ public class TableViewProxy extends TiViewProxy
 		}
 	}
 
+	@Kroll.method
 	public int getIndexByName(String name) {
 		int index = -1;
 		int idx = 0;
