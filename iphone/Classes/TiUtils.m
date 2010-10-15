@@ -440,7 +440,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(int)intValue:(NSString*)name properties:(NSDictionary*)properties def:(int)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if ([value respondsToSelector:@selector(intValue)])
@@ -455,7 +455,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(double)doubleValue:(NSString*)name properties:(NSDictionary*)properties def:(double)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if ([value respondsToSelector:@selector(doubleValue)])
@@ -470,7 +470,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(float)floatValue:(NSString*)name properties:(NSDictionary*)properties def:(float)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if ([value respondsToSelector:@selector(floatValue)])
@@ -485,7 +485,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(BOOL)boolValue:(NSString*)name properties:(NSDictionary*)properties def:(BOOL)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if ([value respondsToSelector:@selector(boolValue)])
@@ -500,7 +500,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(NSString*)stringValue:(NSString*)name properties:(NSDictionary*)properties def:(NSString*)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if ([value isKindOfClass:[NSString class]])
@@ -525,7 +525,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(CGPoint)pointValue:(NSString*)name properties:(NSDictionary*)properties def:(CGPoint)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if ([value isKindOfClass:[NSDictionary class]])
@@ -546,7 +546,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 +(TiColor*)colorValue:(NSString*)name properties:(NSDictionary*)properties def:(TiColor*)def exists:(BOOL*) exists
 {
 	TiColor * result = nil;
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if (value == [NSNull null])
@@ -576,7 +576,7 @@ extern NSString * const TI_APPLICATION_RESOURCE_DIR;
 
 +(TiDimension)dimensionValue:(NSString*)name properties:(NSDictionary*)properties def:(TiDimension)def exists:(BOOL*) exists
 {
-	if (properties != nil)
+	if ([properties isKindOfClass:[NSDictionary class]])
 	{
 		id value = [properties objectForKey:name];
 		if (value != nil)
