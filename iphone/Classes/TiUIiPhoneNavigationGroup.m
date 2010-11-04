@@ -85,7 +85,7 @@
 {
 	UIViewController* windowController = [window controller];
 	NSMutableArray* newControllers = [NSMutableArray arrayWithArray:controller.viewControllers];
-	BOOL animated = (windowController == [newControllers lastObject]);
+	BOOL animated = [TiUtils boolValue:@"animated" properties:properties def:(windowController == [newControllers lastObject])];
 	[newControllers removeObject:windowController];
 	[controller setViewControllers:newControllers animated:animated];
 	
