@@ -718,12 +718,26 @@ MAKE_SYSTEM_PROP(VIDEO_FINISH_REASON_USER_EXITED,MPMovieFinishReasonUserExited);
 		if (mediaList!=nil) {
 			if ([mediaList isKindOfClass:[NSArray class]]) {
 				for (NSNumber* type in mediaList) {
-					mediaTypes |= [type integerValue];
+					switch ([mediaList integerValue]) {
+						case MPMediaTypeMusic:
+						case MPMediaTypeAnyAudio:
+						case MPMediaTypeAudioBook:
+						case MPMediaTypePodcast:
+						case MPMediaTypeAny:
+							mediaTypes |= [type integerValue];
+					}
 				}
 			}
 			else {
 				ENSURE_TYPE(mediaList, NSNumber);
-				mediaTypes = [mediaList integerValue];
+				switch ([mediaList integerValue]) {
+					case MPMediaTypeMusic:
+					case MPMediaTypeAnyAudio:
+					case MPMediaTypeAudioBook:
+					case MPMediaTypePodcast:
+					case MPMediaTypeAny:
+						mediaTypes = [mediaList integerValue];
+				}
 			}
 		}
 		
