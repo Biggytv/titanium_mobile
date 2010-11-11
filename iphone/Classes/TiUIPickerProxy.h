@@ -16,6 +16,7 @@
 }
 
 -(void)setSelectedRow:(id)args;
+-(void)reloadColumn:(id)column;
 
 @end
 
