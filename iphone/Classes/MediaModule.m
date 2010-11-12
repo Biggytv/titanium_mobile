@@ -596,7 +596,7 @@ MAKE_SYSTEM_PROP(VIDEO_FINISH_REASON_USER_EXITED,MPMovieFinishReasonUserExited);
 	NSObject* image = [arg objectAtIndex:0];
 	ENSURE_TYPE(image, NSObject)
 	
-	NSDictionary* saveCallbacks;
+	NSDictionary* saveCallbacks=nil;
 	if ([arg count] > 1) {
 		saveCallbacks = [arg objectAtIndex:1];
 		ENSURE_TYPE(saveCallbacks, NSDictionary);
